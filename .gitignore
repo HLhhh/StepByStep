@@ -3,3 +3,5 @@ solarterms.iml
 stepbystep-infrastructure/stepbystep-infrastructure.iml
 stepbystep-user/stepbystep-user.iml
 stepbystepby-start/stepbystepby-start.iml
+stepbystep-comment/*.iml
+target
