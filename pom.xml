@@ -19,15 +19,32 @@
     <modules>
         <module>stepbystep-infrastructure</module>
         <module>stepbystep-user</module>
+        <module>stepbystepby-start</module>
     </modules>
 
     <properties>
-
+        <mybatisspring.version>2.0.4</mybatisspring.version>
+        <mybatis.version>3.5.4</mybatis.version>
+        <mysql.version>8.0.25</mysql.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatisspring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
