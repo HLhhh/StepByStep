@@ -21,6 +21,7 @@
         <module>stepbystep-user</module>
         <module>stepbystepby-start</module>
         <module>stepbystep-comment</module>
+        <module>stepbystep-web</module>
     </modules>
 
     <properties>
@@ -39,7 +40,17 @@
             </dependency>
             <dependency>
                 <groupId>com.csyl</groupId>
+                <artifactId>stepbystep-user</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.csyl</groupId>
                 <artifactId>stepbystep-comment</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.csyl</groupId>
+                <artifactId>stepbystep-web</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 

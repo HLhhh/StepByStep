@@ -21,6 +21,14 @@
             <groupId>com.csyl</groupId>
             <artifactId>stepbystep-infrastructure</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.csyl</groupId>
+            <artifactId>stepbystep-user</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.csyl</groupId>
+            <artifactId>stepbystep-web</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

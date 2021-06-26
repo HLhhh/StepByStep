@@ -63,7 +63,7 @@ public class MultipleDataSourceConfig {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         bean.setMapperLocations(new PathMatchingResourcePatternResolver()
-                        .getResources("classpath*:mapper/**/*Mapper.xml"));
+                        .getResources("classpath*:mapper/*Mapper.xml"));
 
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setLogImpl(StdOutImpl.class);
