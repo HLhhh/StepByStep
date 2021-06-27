@@ -15,6 +15,8 @@ public interface UUserMapper {
 
     UUser selectByPrimaryKey(Long id);
 
+    UUser selectByLoginName(String loginName);
+
     int updateByPrimaryKeySelective(UUser record);
 
     int updateByPrimaryKey(UUser record);

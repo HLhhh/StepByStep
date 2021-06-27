@@ -23,11 +23,11 @@
         </dependency>
         <dependency>
             <groupId>com.csyl</groupId>
-            <artifactId>stepbystep-user</artifactId>
+            <artifactId>stepbystep-user-domain</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.csyl</groupId>
-            <artifactId>stepbystep-web</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
 
