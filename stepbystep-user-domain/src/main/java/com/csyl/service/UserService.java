@@ -10,9 +10,9 @@ public interface UserService {
     /**
      * 注册
      *
-     * @param t
+     * @param userProxy
      */
-    boolean put(UUser t);
+    boolean put(UserProxy userProxy);
 
     /**
      * 获取
@@ -29,7 +29,7 @@ public interface UserService {
      * @param loginPassword 密码
      * @return
      */
-    UserServiceImpl.UserProxy login(String loginName, String loginPassword);
+    UserProxy login(String loginName, String loginPassword);
 
 
     /**

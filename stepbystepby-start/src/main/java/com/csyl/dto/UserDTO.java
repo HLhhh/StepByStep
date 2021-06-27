@@ -43,6 +43,8 @@ public class UserDTO implements Serializable, DoFactory<UserDTO, UUser> {
      */
     private String loginPassword;
 
+    private String authedToken;
+
     private static final long serialVersionUID = 1L;
 
     @Override
