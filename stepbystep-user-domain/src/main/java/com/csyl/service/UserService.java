@@ -20,7 +20,7 @@ public interface UserService {
      * @param loginName
      * @return
      */
-    UUser getUUser(String loginName);
+    UUser getUser(String loginName);
 
     /**
      * 登录
