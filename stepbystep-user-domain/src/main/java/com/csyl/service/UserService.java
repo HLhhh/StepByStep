@@ -12,7 +12,7 @@ public interface UserService {
      *
      * @param t
      */
-    void put(UUser t);
+    boolean put(UUser t);
 
     /**
      * 获取
@@ -30,4 +30,13 @@ public interface UserService {
      * @return
      */
     UserServiceImpl.UserProxy login(String loginName, String loginPassword);
+
+
+    /**
+     * 身份验证
+     *
+     * @param email 邮箱
+     * @return
+     */
+    String authentication(String email);
 }

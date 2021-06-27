@@ -2,12 +2,16 @@ package com.csyl.service;
 
 import com.csyl.domain.UUser;
 import com.csyl.mapper.UUserMapper;
+import com.csyl.random.MathRandom;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
+import java.time.Duration;
 
 /**
  * @author 霖
@@ -16,11 +20,18 @@ import javax.annotation.Resource;
 public class UserServiceImpl implements UserService {
 
     @Resource
+    private StringRedisTemplate stringRedisTemplate;
+    @Resource
     private UUserMapper userMapper;
 
     @Override
-    public void put(UUser uUser) {
-        userMapper.insert(uUser);
+    public boolean put(UUser uUser) {
+        //验证
+        String authedToken = stringRedisTemplate.opsForValue().get(uUser.getLoginAliasName());
+        if (StringUtils.isBlank(authedToken)) {
+            return false;
+        }
+        return userMapper.insert(uUser) > 0;
     }
 
     @Override
@@ -37,6 +48,14 @@ public class UserServiceImpl implements UserService {
             return UserProxy.unLoginPass();
         }
         return UserProxy.loginPass(uUser);
+    }
+
+    @Override
+    public String authentication(String email) {
+        String authedToken = String.valueOf(MathRandom.creartRandom());
+        stringRedisTemplate.opsForValue().set(email, authedToken);
+        stringRedisTemplate.expire(email, Duration.ofMinutes(1));
+        return authedToken;
     }
 
     @Getter

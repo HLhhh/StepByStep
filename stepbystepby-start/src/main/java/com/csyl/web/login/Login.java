@@ -20,7 +20,6 @@ import javax.annotation.Resource;
 @RequestMapping("/login/v1")
 public class Login {
 
-
     @Resource
     private UserService userService;
 
@@ -40,6 +39,13 @@ public class Login {
     @ResponseBody
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(@RequestBody UserDTO userDTO) {
+        UserServiceImpl.UserProxy login = userService.login(userDTO.getLoginName(), userDTO.getLoginPassword());
+        return login.getPass().toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "authentication", method = RequestMethod.POST)
+    public String authentication(@RequestBody UserDTO userDTO) {
         UserServiceImpl.UserProxy login = userService.login(userDTO.getLoginName(), userDTO.getLoginPassword());
         return login.getPass().toString();
     }
