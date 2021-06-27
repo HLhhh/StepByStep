@@ -16,10 +16,18 @@ public interface UserService {
 
     /**
      * 获取
+     *
      * @param loginName
      * @return
      */
     UUser getUUser(String loginName);
 
-
+    /**
+     * 登录
+     *
+     * @param loginName     用户名
+     * @param loginPassword 密码
+     * @return
+     */
+    UserServiceImpl.UserProxy login(String loginName, String loginPassword);
 }

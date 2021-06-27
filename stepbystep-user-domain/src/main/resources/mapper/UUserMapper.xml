@@ -5,81 +5,91 @@
 <mapper namespace="com.csyl.mapper.UUserMapper">
 
     <resultMap id="BaseResultMap" type="com.csyl.domain.UUser">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="loginStatus" column="login_status" jdbcType="INTEGER"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="loginStatus" column="login_status" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,login_status,login_name,
+        id
+        ,login_status,login_name,
         login_alias_name,login_password
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from u_user
-        where  id = #{id,jdbcType=BIGINT} 
+        where id = #{id,jdbcType=BIGINT}
     </select>
     <select id="selectByLoginName" resultType="com.csyl.domain.UUser">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from u_user
         where login_name = #{loginName,jdbcType=VARCHAR}
     </select>
+    <select id="selectByLoginNameAndLoginPassword" resultType="com.csyl.domain.UUser">
+        select
+        <include refid="Base_Column_List"/>
+        from u_user
+        where login_name = #{loginName,jdbcType=VARCHAR}
+        and
+        login_password = #{loginPassword,jdbcType=VARCHAR}
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from u_user
-        where  id = #{id,jdbcType=BIGINT} 
+        delete
+        from u_user
+        where id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.csyl.domain.UUser" useGeneratedKeys="true">
         insert into u_user
-        ( id,login_status,login_name
-        ,login_alias_name,login_password)
-        values (#{id,jdbcType=BIGINT},#{loginStatus,jdbcType=INTEGER},#{loginName,jdbcType=VARBINARY}
-        ,#{loginAliasName,jdbcType=VARBINARY},#{loginPassword,jdbcType=VARBINARY})
+        ( id, login_status, login_name
+        , login_alias_name, login_password)
+        values ( #{id,jdbcType=BIGINT}, #{loginStatus,jdbcType=INTEGER}, #{loginName,jdbcType=VARBINARY}
+               , #{loginAliasName,jdbcType=VARBINARY}, #{loginPassword,jdbcType=VARBINARY})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.csyl.domain.UUser" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.csyl.domain.UUser"
+            useGeneratedKeys="true">
         insert into u_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="id != null">id,</if>
-                <if test="loginStatus != null">loginStatus,</if>
-                <if test="loginName != null">loginName,</if>
-                <if test="loginAliasName != null">loginAliasName,</if>
-                <if test="loginPassword != null">loginPassword,</if>
+            <if test="id != null">id,</if>
+            <if test="loginStatus != null">loginStatus,</if>
+            <if test="loginName != null">loginName,</if>
+            <if test="loginAliasName != null">loginAliasName,</if>
+            <if test="loginPassword != null">loginPassword,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="id != null">id = #{id,jdbcType=BIGINT},</if>
-                <if test="loginStatus != null">login_status = #{loginStatus,jdbcType=INTEGER},</if>
-                <if test="loginName != null">login_name = #{loginName,jdbcType=VARBINARY},</if>
-                <if test="loginAliasName != null">login_alias_name = #{loginAliasName,jdbcType=VARBINARY},</if>
-                <if test="loginPassword != null">login_password = #{loginPassword,jdbcType=VARBINARY},</if>
+            <if test="id != null">id = #{id,jdbcType=BIGINT},</if>
+            <if test="loginStatus != null">login_status = #{loginStatus,jdbcType=INTEGER},</if>
+            <if test="loginName != null">login_name = #{loginName,jdbcType=VARBINARY},</if>
+            <if test="loginAliasName != null">login_alias_name = #{loginAliasName,jdbcType=VARBINARY},</if>
+            <if test="loginPassword != null">login_password = #{loginPassword,jdbcType=VARBINARY},</if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.csyl.domain.UUser">
         update u_user
         <set>
-                <if test="loginStatus != null">
-                    login_status = #{loginStatus,jdbcType=INTEGER},
-                </if>
-                <if test="loginName != null">
-                    login_name = #{loginName,jdbcType=VARBINARY},
-                </if>
-                <if test="loginAliasName != null">
-                    login_alias_name = #{loginAliasName,jdbcType=VARBINARY},
-                </if>
-                <if test="loginPassword != null">
-                    login_password = #{loginPassword,jdbcType=VARBINARY},
-                </if>
+            <if test="loginStatus != null">
+                login_status = #{loginStatus,jdbcType=INTEGER},
+            </if>
+            <if test="loginName != null">
+                login_name = #{loginName,jdbcType=VARBINARY},
+            </if>
+            <if test="loginAliasName != null">
+                login_alias_name = #{loginAliasName,jdbcType=VARBINARY},
+            </if>
+            <if test="loginPassword != null">
+                login_password = #{loginPassword,jdbcType=VARBINARY},
+            </if>
         </set>
-        where   id = #{id,jdbcType=BIGINT} 
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.csyl.domain.UUser">
         update u_user
-        set 
-            login_status =  #{loginStatus,jdbcType=INTEGER},
-            login_name =  #{loginName,jdbcType=VARBINARY},
-            login_alias_name =  #{loginAliasName,jdbcType=VARBINARY},
-            login_password =  #{loginPassword,jdbcType=VARBINARY}
-        where   id = #{id,jdbcType=BIGINT} 
+        set login_status     = #{loginStatus,jdbcType=INTEGER},
+            login_name       = #{loginName,jdbcType=VARBINARY},
+            login_alias_name = #{loginAliasName,jdbcType=VARBINARY},
+            login_password   = #{loginPassword,jdbcType=VARBINARY}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>
