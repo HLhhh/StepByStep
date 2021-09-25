@@ -17,6 +17,8 @@ import java.util.List;
 @Getter
 public class MonthModel {
 
+    private Integer monthNumber;
+    private String title;
     private List<DayModel> dayModels;
 
     public MonthModel() {
@@ -35,9 +37,14 @@ public class MonthModel {
         }
     }
 
+    public void sign(int index) {
+        dayModels.get(index - 1).sign();
+    }
+
     private int wish(LocalDate localDate) {
         boolean leapYear = Math.floorMod(localDate.getYear(), 4) == 0;
         Month month = localDate.getMonth();
+        this.monthNumber = month.getValue();
         return month.equals(Month.FEBRUARY) ?
                 (leapYear ? month.maxLength() : month.minLength()) :
                 month.maxLength();

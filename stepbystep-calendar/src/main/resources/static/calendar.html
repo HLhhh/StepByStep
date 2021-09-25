@@ -150,6 +150,18 @@
      */
     const url = "http://localhost:8080/"
 
+    /**
+     * 6.页面初始化
+     */
+    $().ready(function () {
+        $.ajax({
+            url: url + "calendar/init",
+            success: function (result) {
+                console.log(result);
+            }
+        });
+    });
+
 
     // 工具方法 - end
     let weekStr = '日一二三四五六';
@@ -248,18 +260,24 @@
     for (let i = 0; i < domArr.length; i++) {
         let item = domArr[i]
         item.onclick = function () {
+            console.log(item.innerHTML)
             $.ajax({
-                url: url + "calendar/init",
+                url: url + "calendar/sign/" + document.getElementById('nowMonth').textContent + "/" + item.innerHTML,
                 success: function (result) {
-                    console.log(result);
+                    item.style.background = '#d41951'
+                    item.name = true
                 }
             });
         }
         item.onmouseover = function () {
-            item.style.background = '#FAF0E6'
+            if (!item.name || item.name === false) {
+                item.style.background = '#FAF0E6'
+            }
         }
         item.onmouseout = function () {
-            item.style.background = '#E6E6FA'
+            if (!item.name || item.name === false) {
+                item.style.background = '#E6E6FA'
+            }
         }
     }
 </script>
