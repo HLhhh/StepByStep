@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean put(UserProxy proxy) {
         //验证
-        String authedToken = stringRedisTemplate.opsForValue().get(proxy.getUUser().getLoginAliasName());
+        String authedToken = stringRedisTemplate.opsForValue().get(new String(proxy.getUUser().getLoginAliasName()));
         if (StringUtils.isBlank(authedToken) || !authedToken.equals(proxy.getAuthedToken())) {
             return false;
         }
