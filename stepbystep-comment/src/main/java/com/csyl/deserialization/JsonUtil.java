@@ -17,11 +17,14 @@ import java.util.Collection;
 @Slf4j
 public class JsonUtil {
 
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     static {
-        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        objectMapper.activateDefaultTyping(objectMapper.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
+        OBJECT_MAPPER.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+
+        //下面的配置会把类型打印出来
+        //OBJECT_MAPPER.activateDefaultTyping(OBJECT_MAPPER.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
+        OBJECT_MAPPER.activateDefaultTyping(OBJECT_MAPPER.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.JAVA_LANG_OBJECT, JsonTypeInfo.As.PROPERTY);
     }
 
     public static <T> String objToJson(T obj) {
@@ -30,7 +33,7 @@ public class JsonUtil {
         }
 
         try {
-            return obj instanceof String ? (String) obj : objectMapper.writeValueAsString(obj);
+            return obj instanceof String ? (String) obj : OBJECT_MAPPER.writeValueAsString(obj);
         } catch (Exception e) {
             log.warn("obj To json is error", e);
             return null;
@@ -50,7 +53,7 @@ public class JsonUtil {
         }
 
         try {
-            return obj instanceof String ? (String) obj : objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+            return obj instanceof String ? (String) obj : OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
         } catch (Exception e) {
             log.warn("obj To json pretty is error", e);
             return null;
@@ -63,7 +66,7 @@ public class JsonUtil {
         }
 
         try {
-            return clazz.equals(String.class) ? (T) json : objectMapper.readValue(json, clazz);
+            return clazz.equals(String.class) ? (T) json : OBJECT_MAPPER.readValue(json, clazz);
         } catch (Exception e) {
             log.warn("json To obj is error", e);
             return null;
@@ -84,7 +87,7 @@ public class JsonUtil {
         }
 
         try {
-            return (T) (typeReference.getType().equals(String.class) ? json : objectMapper.readValue(json, typeReference));
+            return (T) (typeReference.getType().equals(String.class) ? json : OBJECT_MAPPER.readValue(json, typeReference));
         } catch (Exception e) {
             log.warn("json To obj is error", e);
             return null;
@@ -101,10 +104,10 @@ public class JsonUtil {
      * @return
      */
     public static <T> T json2Object(String json, Class<? extends Collection> collectionClazz, Class<?> element) {
-        JavaType javaType = objectMapper.getTypeFactory().constructCollectionType(collectionClazz, element);
+        JavaType javaType = OBJECT_MAPPER.getTypeFactory().constructCollectionType(collectionClazz, element);
 
         try {
-            return objectMapper.readValue(json, javaType);
+            return OBJECT_MAPPER.readValue(json, javaType);
         } catch (Exception e) {
             log.warn("json To obj is error", e);
             return null;
