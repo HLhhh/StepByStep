@@ -145,6 +145,11 @@
         }
     }
 
+    /**
+     * 静态的资源
+     */
+    const url = "http://localhost:8080/"
+
 
     // 工具方法 - end
     let weekStr = '日一二三四五六';
@@ -243,7 +248,12 @@
     for (let i = 0; i < domArr.length; i++) {
         let item = domArr[i]
         item.onclick = function () {
-            console.log("111");
+            $.ajax({
+                url: url + "calendar/init",
+                success: function (result) {
+                    console.log(result);
+                }
+            });
         }
         item.onmouseover = function () {
             item.style.background = '#FAF0E6'
