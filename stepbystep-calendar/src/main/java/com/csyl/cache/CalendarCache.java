@@ -27,4 +27,8 @@ public class CalendarCache {
         });
         return CALENDAR_MAP.get(month);
     }
+
+    public static ConcurrentHashMap<Integer, MonthModel> getAll() {
+        return CALENDAR_MAP;
+    }
 }
